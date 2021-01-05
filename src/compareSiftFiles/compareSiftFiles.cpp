@@ -55,10 +55,10 @@ int main( int argc, char* argv[] )
 
     vector<float> desc_stats( 128, 0.0f );
 
+    ostream* print_dists = param.descfile_verbose ? descfile : 0;
+
     for( auto l : l_one )
     {
-        ostream* print_dists = param.descfile_verbose ? descfile : 0;
-
         l.compareBestMatch( *outfile, print_dists, l_two, desc_stats, param.briefinfo );
         ct++;
         if( float(ct * 100) / len >= float(nextpercent) )
