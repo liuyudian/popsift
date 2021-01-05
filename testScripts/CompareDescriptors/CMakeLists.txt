@@ -6,18 +6,6 @@ find_program(GNUPLOT gnuplot)
 find_program(CONVERT convert)
 find_program(VLFEAT sift PATH_SUFFIXES glnxa64 bin/glnxa64)
 
-if(AWK MATCHES ".+-NOTFOUND")
-    message(WARNING  "WARNING: awk (and mawk and gawk) could not be found (${AWK}).")
-else()
-    message(STATUS  "awk found (${AWK}).")
-endif()
-
-if(SORT MATCHES ".+-NOTFOUND")
-    message(WARNING  "WARNING: sort could not be found (${SORT}).")
-else()
-    message(STATUS  "sort found (${SORT}).")
-endif()
-
 if(GNUPLOT MATCHES ".+-NOTFOUND")
     message(WARNING  "WARNING: gnupot could not be found (${GNUPLOT}).")
 else()
@@ -34,6 +22,18 @@ if(VLFEAT MATCHES ".+-NOTFOUND")
     message(WARNING  "WARNING: vlfeat could not be found (${VLFEAT}).")
 else()
     message(STATUS  "vlfeat found (${VLFEAT}).")
+endif()
+
+if(SORT MATCHES ".+-NOTFOUND")
+    message(WARNING  "WARNING: sort could not be found (${SORT}). Compare tests will fail.")
+else()
+    message(STATUS  "sort found (${SORT}).")
+endif()
+
+if(AWK MATCHES ".+-NOTFOUND")
+    message(WARNING  "WARNING: awk (and mawk and gawk) could not be found (${AWK}). Compare tests will fail")
+else()
+    message(STATUS  "awk found (${AWK}).")
 endif()
 
 configure_file( ${CMAKE_CURRENT_SOURCE_DIR}/compareWithVLFeat.sh.in
